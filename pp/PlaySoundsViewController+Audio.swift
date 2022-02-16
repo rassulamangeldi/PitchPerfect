@@ -8,11 +8,9 @@
 import UIKit
 import AVFoundation
 
-// MARK: - PlaySoundsViewController: AVAudioPlayerDelegate
 
 extension PlaySoundsViewController: AVAudioPlayerDelegate {
     
-    // MARK: Alerts
     
     struct Alerts {
         static let DismissAlert = "Dismiss"
@@ -27,11 +25,8 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         static let AudioEngineError = "Audio Engine Error"
     }
     
-    // MARK: PlayingState (raw values correspond to sender tags)
-    
     enum PlayingState { case playing, notPlaying }
-    
-    // MARK: Audio Functions
+
     
     func setupAudio() {
         // initialize (recording) audio file
@@ -110,7 +105,7 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
             return
         }
         
-        // play the recording!
+        
         audioPlayerNode.play()
     }
     
@@ -131,16 +126,14 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
             audioEngine.reset()
         }
     }
-    
-    // MARK: Connect List of Audio Nodes
+
     
     func connectAudioNodes(_ nodes: AVAudioNode...) {
         for x in 0..<nodes.count-1 {
             audioEngine.connect(nodes[x], to: nodes[x+1], format: audioFile.processingFormat)
         }
     }
-    
-    // MARK: UI Functions
+
 
     func configureUI(_ playState: PlayingState) {
         switch(playState) {
